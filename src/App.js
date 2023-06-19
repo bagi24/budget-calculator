@@ -56,6 +56,32 @@ function App() {
       });
     }
   };
+
+  //clear all items
+
+  const clearItems = () => {
+    console.log("cleared all items");
+
+    setExpenses([]);
+    handleAlert({ type: "danger", text: "All item deleted" });
+  };
+
+  //handle Delete
+
+  const handleDelete = (id) => {
+    console.log("item deleted : ${id}");
+
+    let tempExpenses = expenses.filter((item) => item.id !== id);
+
+    setExpenses(tempExpenses);
+    handleAlert({ type: "danger", text: "item deleted" });
+  };
+
+  //handle Edit
+  const handleEdit = (id) => {
+    console.log("item Edited : ${id}");
+  };
+
   return (
     <div>
       {alert.show && <Alert type={alert.type} text={alert.text} />}
@@ -69,7 +95,12 @@ function App() {
           handleCharge={handleCharge}
           handleSubmit={handleSubmit}
         />
-        <ExpenseList expenses={expenses} />
+        <ExpenseList
+          expenses={expenses}
+          handleDelete={handleDelete}
+          handleEdit={handleEdit}
+          clearItems={clearItems}
+        />
       </main>
 
       <h1>
