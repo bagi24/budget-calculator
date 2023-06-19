@@ -25,7 +25,7 @@ export const ExpenseList = ({
 
       {expenses.length > 0 && (
         <button className="btn" onClick={clearItems}>
-          clear expenses <MdDelete className="btn-icon" />{" "}
+          clear expenses <MdDelete className="btn-icon" />
         </button>
       )}
     </>
