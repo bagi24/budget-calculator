@@ -1,11 +1,11 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto&display=swap");
 :root {
-  --primaryColor: #f15025;
-  --mainWhite: #fff;
+  --primaryColor: #102746;
+  --mainWhite: #ffffff;
   --mainBlack: #222;
-  --mainGrey: #9e9e9e;
-  --mainRed: #d50000;
-  --mainGreen: #4caf50;
+  --mainGrey: #458091;
+  --mainRed: #da5b00;
+  --mainGreen: #155316;
 }
 * {
   margin: 0;
@@ -30,9 +30,12 @@ h1 {
   background: var(--mainWhite);
   padding-bottom: 2rem;
   border-radius: 2px;
+  border-radius: 75px;
+  box-shadow: none;
 }
 .form-center {
   display: flex;
+  flex-direction: column;
   padding: 0 1rem;
 }
 .form-group {
@@ -146,13 +149,13 @@ label {
   padding: 2px 5px;
 }
 .alert {
-  padding: 0.75rem 1.25rem;
+  padding: 0.75rem;
   color: var(--mainWhite);
   text-align: center;
   text-transform: capitalize;
   width: 90%;
   margin: 2rem auto 0 auto;
-  border-radius: 2px;
+  border-radius: 75px;
   text-transform: capitalize;
 }
 .alert-danger {

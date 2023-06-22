@@ -111,7 +111,7 @@ function App() {
   };
 
   return (
-    <div>
+    <div className="AppConteiner">
       {alert.show && <Alert type={alert.type} text={alert.text} />}
       <Alert />
       <h1> budget calculator </h1>

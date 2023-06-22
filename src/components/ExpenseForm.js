@@ -1,5 +1,6 @@
 import React from "react";
 import { MdSend } from "react-icons/md";
+import InputOptionForm from "./InputOptionForm";
 
 export const ExpenseForm = ({
   charge,
@@ -24,7 +25,6 @@ export const ExpenseForm = ({
             onChange={handleCharge}
           />
         </div>
-
         <div className="form-group">
           <label htmlFor="amount">amount</label>
           <input
@@ -37,6 +37,8 @@ export const ExpenseForm = ({
             onChange={handleAmount}
           />
         </div>
+
+        <InputOptionForm />
       </div>
       <button type="submit" className="btn">
         {edit ? "edit" : "submit"}
