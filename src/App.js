@@ -29,6 +29,10 @@ function App() {
 
   const [id, setId] = useState(0);
 
+  //input option
+  const [selects, setSelects] = useState();
+  const [selectedValue, setSelectedValue] = useState("");
+
   //useEffect
 
   useEffect(() => {
@@ -110,6 +114,13 @@ function App() {
     setId(id);
   };
 
+  // input Option
+
+  const handleSelect = (e) => {
+    setSelects(e.target.value);
+    setSelectedValue(e.target.value);
+  };
+
   return (
     <div className="AppConteiner">
       {alert.show && <Alert type={alert.type} text={alert.text} />}
@@ -123,6 +134,9 @@ function App() {
           handleCharge={handleCharge}
           handleSubmit={handleSubmit}
           edit={edit}
+          handleSelect={handleSelect}
+          selects={selects}
+          selectedValue={selectedValue}
         />
         <ExpenseList
           expenses={expenses}

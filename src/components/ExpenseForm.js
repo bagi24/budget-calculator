@@ -1,6 +1,5 @@
 import React from "react";
 import { MdSend } from "react-icons/md";
-import InputOptionForm from "./InputOptionForm";
 
 export const ExpenseForm = ({
   charge,
@@ -9,6 +8,9 @@ export const ExpenseForm = ({
   handleAmount,
   handleSubmit,
   edit,
+  selects,
+  handleSelect,
+  selectedValue,
 }) => {
   return (
     <form onSubmit={handleSubmit}>
@@ -38,7 +40,19 @@ export const ExpenseForm = ({
           />
         </div>
 
-        <InputOptionForm />
+        <div>
+          <div className="form-group">
+            <select
+              value={selects}
+              onChange={handleSelect}
+              className="form-control"
+            >
+              <option> ბიუჯეტი</option>
+              <option> დანახარჯი</option>
+            </select>
+          </div>
+          {selectedValue && <div>Selected Value: {selectedValue}</div>}
+        </div>
       </div>
       <button type="submit" className="btn">
         {edit ? "edit" : "submit"}
