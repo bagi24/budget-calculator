@@ -47,8 +47,9 @@ export const ExpenseForm = ({
               onChange={handleSelect}
               className="form-control"
             >
-              <option> ბიუჯეტი</option>
-              <option> დანახარჯი</option>
+              <option value="">Select an option</option>
+              <option value="გაყიდვა"> გაყიდვა</option>
+              <option value="ყიდვა"> ყიდვა</option>
             </select>
           </div>
           {selectedValue && <div>Selected Value: {selectedValue}</div>}

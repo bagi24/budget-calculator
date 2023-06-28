@@ -15,33 +15,35 @@ const initialExpenses = localStorage.getItem("expenses")
   ? JSON.parse(localStorage.getItem("expenses"))
   : [];
 
+const initialMoney = localStorage.getItem("money")
+  ? JSON.parse(localStorage.getItem("money"))
+  : 10000;
+
 function App() {
   const [expenses, setExpenses] = useState(initialExpenses);
-  // single expense
+
   const [charge, setCharge] = useState("");
-  // single amount
+
   const [amount, setAmount] = useState("");
 
-  //alert
   const [alert, setAlert] = useState({ show: false });
 
   const [edit, setEdit] = useState(false);
 
   const [id, setId] = useState(0);
 
-  //input option
   const [selects, setSelects] = useState();
-  const [selectedValue, setSelectedValue] = useState("");
 
-  //useEffect
+  console.log(selects);
+
+  const [money, setMoney] = useState(initialMoney);
 
   useEffect(() => {
-    // console.log("useEffect");
     localStorage.setItem("expenses", JSON.stringify(expenses));
-  }, [expenses]);
+    localStorage.setItem("money", JSON.stringify(money));
+  }, [expenses, money]);
 
   const handleCharge = (e) => {
-    // console.log(`charge: ${e.target.value} `);
     setCharge(e.target.value);
   };
 
@@ -72,12 +74,16 @@ function App() {
         const singleExpense = { id: uuidv4(), charge, amount };
         setExpenses([...expenses, singleExpense]);
         handleAlert({ type: "success", text: "item added" });
+        if (selects === "გაყიდვა") {
+          setMoney(money + parseInt(amount));
+        } else if (selects === "ყიდვა") {
+          setMoney(money - parseInt(amount));
+        }
       }
 
       setCharge("");
       setAmount("");
     } else {
-      //handle alert called
       handleAlert({
         type: "danger",
         text: `charge can't be empty value and amount value has to be bigger than zero`,
@@ -85,16 +91,10 @@ function App() {
     }
   };
 
-  //clear all items
-
   const clearItems = () => {
-    // console.log("cleared all items");
-
     setExpenses([]);
     handleAlert({ type: "danger", text: "All item deleted" });
   };
-
-  //handle Delete
 
   const handleDelete = (id) => {
     let tempExpenses = expenses.filter((item) => item.id !== id);
@@ -103,7 +103,6 @@ function App() {
     handleAlert({ type: "danger", text: "item deleted" });
   };
 
-  //handle Edit
   const handleEdit = (id) => {
     let expense = expenses.find((item) => item.id === id);
     let { charge, amount } = expense;
@@ -114,11 +113,8 @@ function App() {
     setId(id);
   };
 
-  // input Option
-
   const handleSelect = (e) => {
     setSelects(e.target.value);
-    setSelectedValue(e.target.value);
   };
 
   return (
@@ -126,6 +122,9 @@ function App() {
       {alert.show && <Alert type={alert.type} text={alert.text} />}
       <Alert />
       <h1> budget calculator </h1>
+
+      <h1>ჩემი საფულე: ${money}</h1>
+
       <main className="App">
         <ExpenseForm
           charge={charge}
@@ -136,7 +135,6 @@ function App() {
           edit={edit}
           handleSelect={handleSelect}
           selects={selects}
-          selectedValue={selectedValue}
         />
         <ExpenseList
           expenses={expenses}
@@ -145,16 +143,6 @@ function App() {
           clearItems={clearItems}
         />
       </main>
-
-      <h1>
-        total spending:
-        <span className="total">
-          $
-          {expenses.reduce((acc, curr) => {
-            return (acc += parseInt(curr.amount));
-          }, 0)}
-        </span>
-      </h1>
     </div>
   );
 }
