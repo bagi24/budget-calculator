@@ -148,22 +148,56 @@ label {
   border-radius: 2px;
   padding: 2px 5px;
 }
-.alert {
-  padding: 0.75rem;
-  color: var(--mainWhite);
-  text-align: center;
-  text-transform: capitalize;
-  width: 90%;
-  margin: 2rem auto 0 auto;
-  border-radius: 75px;
-  text-transform: capitalize;
+
+.toast-container {
+  z-index: 9999;
 }
-.alert-danger {
-  background: var(--mainRed);
+
+/* Toast body */
+.toast-body {
+  font-family: "Roboto", sans-serif;
 }
-.alert-success {
-  background: var(--mainGreen);
+
+/* Success notification */
+.toast-success {
+  background: #155316;
+  color: #ffffff;
 }
+
+/* Error notification */
+.toast-error {
+  background: #da5b00;
+  color: #ffffff;
+}
+
+/* Warning notification */
+.toast-warning {
+  background: #e0a800;
+  color: #ffffff;
+}
+
+/* Info notification */
+.toast-info {
+  background: #458091;
+  color: #ffffff;
+}
+
+/* Close button */
+.toast-close-button {
+  color: #ffffff;
+  font-size: 16px;
+}
+
+/* Close button hover */
+.toast-close-button:hover {
+  color: #ffffff;
+}
+
+/* Progress bar */
+.toast-progress-bar {
+  background-color: #ffffff;
+}
+
 @media screen and (min-width: 601px) {
   .App,
   .list,

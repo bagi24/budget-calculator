@@ -2,13 +2,15 @@ import React from "react";
 import { MdEdit, MdDelete } from "react-icons/md";
 
 export const ExpenseItem = ({ expense, handleEdit, handleDelete }) => {
-  const { id, charge, amount } = expense;
+  const { id, charge, amount, backgroundColor } = expense;
 
   return (
     <li className="item">
       <div className="info">
         <span className="expense">{charge}</span>
-        <span className="amount">{amount}</span>
+        <span className="amount" style={{ backgroundColor }}>
+          {amount}
+        </span>
       </div>
 
       <div>

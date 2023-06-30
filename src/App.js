@@ -1,9 +1,10 @@
 import "./App.css";
 import { ExpenseList } from "./components/ExpenseList";
 import { ExpenseForm } from "./components/ExpenseForm";
-import { Alert } from "./components/Alert";
 import { v4 as uuidv4 } from "uuid";
 import { useEffect, useState } from "react";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 // const initialExpenses = [
 //   { id: uuidv4(), charge: "rent", amount: 1600 },
@@ -25,8 +26,6 @@ function App() {
   const [charge, setCharge] = useState("");
 
   const [amount, setAmount] = useState("");
-
-  const [alert, setAlert] = useState({ show: false });
 
   const [edit, setEdit] = useState(false);
 
@@ -52,13 +51,6 @@ function App() {
     setAmount(e.target.value);
   };
 
-  const handleAlert = ({ type, text }) => {
-    setAlert({ show: true, type, text });
-    setTimeout(() => {
-      setAlert({ show: false });
-    }, 3000);
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -69,38 +61,43 @@ function App() {
         });
         setExpenses(tempExpenses);
         setEdit(false);
-        handleAlert({ type: "success", text: "item edited" });
+
+        toast.success("Edited successfully!");
       } else {
         const singleExpense = { id: uuidv4(), charge, amount };
         setExpenses([...expenses, singleExpense]);
-        handleAlert({ type: "success", text: "item added" });
+
+        toast.success("Expense added successfully!");
         if (selects === "გაყიდვა") {
           setMoney(money + parseInt(amount));
+          singleExpense.amount = "+" + amount;
+          singleExpense.backgroundColor = "green";
         } else if (selects === "ყიდვა") {
           setMoney(money - parseInt(amount));
+          singleExpense.amount = "-" + amount;
+          singleExpense.backgroundColor = "red";
         }
       }
 
       setCharge("");
       setAmount("");
     } else {
-      handleAlert({
-        type: "danger",
-        text: `charge can't be empty value and amount value has to be bigger than zero`,
-      });
+      toast.info("Fill in the fields!");
     }
   };
 
   const clearItems = () => {
     setExpenses([]);
-    handleAlert({ type: "danger", text: "All item deleted" });
+
+    toast.success("Clear all Expenses!");
   };
 
   const handleDelete = (id) => {
     let tempExpenses = expenses.filter((item) => item.id !== id);
 
     setExpenses(tempExpenses);
-    handleAlert({ type: "danger", text: "item deleted" });
+
+    toast.success("Deleted successfully!");
   };
 
   const handleEdit = (id) => {
@@ -119,8 +116,6 @@ function App() {
 
   return (
     <div className="AppConteiner">
-      {alert.show && <Alert type={alert.type} text={alert.text} />}
-      <Alert />
       <h1> budget calculator </h1>
 
       <h1>ჩემი საფულე: ${money}</h1>
@@ -143,6 +138,7 @@ function App() {
           clearItems={clearItems}
         />
       </main>
+      <ToastContainer />
     </div>
   );
 }
