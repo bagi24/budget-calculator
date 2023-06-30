@@ -10,7 +10,6 @@ export const ExpenseForm = ({
   edit,
   selects,
   handleSelect,
-  selectedValue,
 }) => {
   return (
     <form onSubmit={handleSubmit}>
@@ -40,19 +39,16 @@ export const ExpenseForm = ({
           />
         </div>
 
-        <div>
-          <div className="form-group">
-            <select
-              value={selects}
-              onChange={handleSelect}
-              className="form-control"
-            >
-              <option value="">Select an option</option>
-              <option value="გაყიდვა"> გაყიდვა</option>
-              <option value="ყიდვა"> ყიდვა</option>
-            </select>
-          </div>
-          {selectedValue && <div>Selected Value: {selectedValue}</div>}
+        <div className="form-group">
+          <select
+            value={selects}
+            onChange={handleSelect}
+            className="form-control"
+          >
+            <option>Select an option</option>
+            <option value="გაყიდვა"> გაყიდვა</option>
+            <option value="ყიდვა"> ყიდვა</option>
+          </select>
         </div>
       </div>
       <button type="submit" className="btn">

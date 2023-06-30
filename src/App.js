@@ -5,6 +5,8 @@ import { v4 as uuidv4 } from "uuid";
 import { useEffect, useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { FaWallet } from "react-icons/fa";
+import { FaDollarSign } from "react-icons/fa";
 
 // const initialExpenses = [
 //   { id: uuidv4(), charge: "rent", amount: 1600 },
@@ -118,7 +120,11 @@ function App() {
     <div className="AppConteiner">
       <h1> budget calculator </h1>
 
-      <h1>ჩემი საფულე: ${money}</h1>
+      <div className="h1">
+        <FaWallet className="walletIcon" color="yellow" />
+        {money}
+        <FaDollarSign className="dollarIcon" color="white" size={35} />
+      </div>
 
       <main className="App">
         <ExpenseForm
